@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Meta -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Title -->
+    <title>Campaign</title>
+
+    <!-- Tailwind CSS -->
+    <link href="css/style.css" rel="stylesheet" />
+  </head>
+  <body class="container mx-auto max-w-2xl">
+    <header class="relative h-svh bg-cover bg-center bg-no-repeat">
+      <img src="img/photo.jpg" alt="Campaign Image" class="h-1/2 w-full object-cover" />
+      <div
+        class="absolute inset-0 flex flex-col items-start justify-end bg-gradient-to-b from-transparent via-white to-white p-4">
+        <div class="mb-4">
+          <h1 class="mb-2 text-3xl font-bold">Bangkit Tuntut Transparansi dan Penurunan Biaya Wisuda!</h1>
+          <p class="italic">
+            Mahasiswa Telkom University Purwokerto dipaksa menanggung kenaikan biaya wisuda yang melonjak hingga Rp.
+            1.500.000 tanpa alasan yang jelas...
+          </p>
+        </div>
+        <div id="progress-bar-container" class="mb-4 w-full">
+          <div id="progress-bar" class="h-4 w-full bg-gray-200">
+            <div id="progress" class="h-4 w-0 bg-red-500"></div>
+          </div>
+          <div id="progress-text" class="mt-1 flex justify-between gap-8 text-sm">
+            <span class="text-left">0 mahasiswa telah mengisi</span>
+            <span class="text-right">dari 100.000 total mahasiswa</span>
+          </div>
+        </div>
+        <div id="scroll-down" class="mb-4 w-full text-center">
+          <a href="#campaign" class="text-blue-500">Gulir ke bawah</a>
+        </div>
+      </div>
+    </header>
+    <hr class="my-4" />
+    <main id="campaign" class="p-4">
+      <section id="campaign" class="mb-4">
+        <p class="mb-2">
+          Biaya wisuda Telkom University Purwokerto tiba-tiba dinaikkan dari Rp. 850.000 menjadi Rp. 1.500.000,
+          membebani mahasiswa tanpa alasan yang transparan dan tanpa ada perbaikan fasilitas yang jelas. Fasilitas yang
+          ditawarkan tidak sebanding dengan lonjakan biaya yang ditetapkan. Di tengah kebijakan ini, mahasiswa terus
+          menuntut kejelasan dan transparansi.
+        </p>
+        <p class="mb-2">
+          Pihak Akademik dan Kemahasiswaan telah berjanji untuk mengadakan diskusi terbuka bersama Bu Tenia selaku
+          Direktur Telkom University Purwokerto. Namun hingga hari ini, jadwal diskusi ini belum ditetapkan karena
+          alasan agenda yang padat. Mahasiswa menuntut kepastian diskusi ini agar suara mereka benar-benar didengar oleh
+          pihak yang bertanggung jawab.
+        </p>
+        <p class="mb-2"><strong>Tuntutan yang disuarakan mahasiswa:</strong></p>
+        <ol class="ml-4 list-outside list-decimal">
+          <li class="mb-2">
+            <strong>Penurunan biaya wisuda</strong> ke Rp. 850.000 seperti tahun sebelumnya, demi keringanan bagi
+            seluruh wisudawan.
+          </li>
+          <li class="mb-2">
+            <strong>Transparansi penuh</strong> mengenai alokasi dana wisuda, agar tidak ada lagi kebijakan yang
+            merugikan mahasiswa.
+          </li>
+          <li class="mb-2">
+            <strong>Penyediaan fasilitas wisuda yang layak dan sepadan</strong> dengan biaya yang dibebankan.
+          </li>
+          <li class="mb-2">
+            <strong>Kepastian tanggal diskusi terbuka</strong> bersama Bu Tenia, agar semua pertanyaan mahasiswa dapat
+            langsung dijawab.
+          </li>
+        </ol>
+        <p class="mb-2">
+          Mahasiswa Telkom University Purwokerto bersatu dan menyerukan perubahan untuk kebijakan wisuda yang adil dan
+          transparan. Wisuda adalah hak, bukan beban tambahan tanpa kejelasan!
+        </p>
+        <p class="mb-2">
+          <strong>
+            Hidup Mahasiswa! Hidup Perjuangan!✊ Bangkit bersama untuk tuntut keadilan di Telkom University Purwokerto!
+          </strong>
+        </p>
+        <div id="signature" class="mt-4 border border-gray-200 bg-gradient-to-b from-white to-gray-100 p-4">
+          <p class="mb-4 text-justify">
+            Mari dukung petisi ini untuk memperjuangkan
+            <strong>kebijakan wisuda yang lebih adil, transparan, dan terjangkau</strong>
+            bagi seluruh mahasiswa! Bersama, kita suarakan aspirasi kita agar kampus bisa lebih peka terhadap kebutuhan
+            kita.
+          </p>
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSdFi2JEMYzTv7ebRudcFmKFeIDDt91dQssBfbU3Vl8_5QaX2g/viewform?usp=sf_link"
+            class="block w-full rounded bg-red-500 px-4 py-2 text-center text-white"
+            target="_blank"
+            >Tandatangani Petisi</a
+          >
+        </div>
+      </section>
+      <hr class="my-8" />
+      <section id="signatures-container" class="mt-4">
+        <h2 class="mb-4 text-center text-xl font-semibold">Tanggapan Para Mahasiswa</h2>
+        <div class="grid grid-cols-1 gap-4" id="signatures"></div>
+      </section>
+    </main>
+    <!-- <footer class="p-4 text-center">
+      <p>Presented by BEM KEMA Tel-U Purwokerto</p>
+    </footer> -->
+  </body>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      fetch('https://sheetdb.io/api/v1/qnjvuooij70kg?sort_by=Timestamp&sort_order=desc')
+        .then((response) => response.json())
+        .then((data) => {
+          updateProgress(data.length);
+          displaySignatures(data);
+        })
+        .catch((error) => console.error('Error fetching data:', error));
+    });
+
+    function updateProgress(count) {
+      const progress = (count / 500) * 100;
+      const progressBar = document.getElementById('progress');
+      const progressText = document.getElementById('progress-text');
+      progressBar.style.width = `${progress}%`;
+      progressText.innerHTML = `
+        <span class="text-left">${count} mahasiswa telah mengisi</span>
+        <span class="text-right">dari 500 total mahasiswa</span>
+      `;
+    }
+
+    function displaySignatures(data) {
+      const signatures = document.getElementById('signatures');
+      const fragment = document.createDocumentFragment();
+      let count = 0;
+      
+      data.forEach((item) => {
+      if (count >= 10) return;
+      if (!item['Tanggapan / Pernyataan Dukungan (opsional)']) return;
+      
+      const signature = document.createElement('div');
+      signature.classList.add('border', 'border-gray-200', 'p-4', 'flex', 'flex-col', 'justify-between');
+      signature.innerHTML = `
+        <p class="mb-2">
+        "${item['Tanggapan / Pernyataan Dukungan (opsional)']}"
+        </p>
+        <p class="text-right">- ${item['Nama Lengkap']},<br />Mahasiswa ${item['Program Studi']}</p>
+      `;
+      fragment.appendChild(signature);
+      count++;
+      });
+      
+      signatures.appendChild(fragment);
+    }
+  </script>
+</html>
